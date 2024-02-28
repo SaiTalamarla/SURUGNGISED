@@ -1,0 +1,17 @@
+public class Page {
+   private Integer pageId;
+   private String name;
+   private String description;
+   private String type;
+   private int totalMembers;
+   private List<Recommendation> recommendation;
+
+   private List<Recommendation> getRecommendation();
+ }
+
+ public class Recommendation {
+   private Integer recommendationId;
+   private int rating;
+   private String description;
+   private Date createdAt;
+ }

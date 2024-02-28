@@ -1,0 +1,41 @@
+// For simplicity, we are not defining getter and setter functions. The reader can
+// assume that all class attributes are private and accessed through their respective
+// public getter method and modified only through their public setter method.
+
+public class Account {
+  private String id;
+  private String password;
+  private AccountStatus status;
+
+  public boolean resetPassword();
+}
+
+public abstract class Person {
+  private String name;
+  private Address address;
+  private String email;
+  private String phone;
+
+  private Account account;
+}
+
+public class Member extends Person {
+  private Date dateOfMembership;
+  private String headline;
+  private byte[] photo;
+  private List<Member> memberSuggestions;
+  private List<Member> memberFollows;
+  private List<Member> memberConnections;
+  private List<Company> companyFollows;
+  private List<Group> groupFollows;
+  private Profile profile;
+
+  public boolean sendMessage(Message message);
+  public boolean createPost(Post post);
+  public boolean sendConnectionInvitation(ConnectionInvitation invitation);
+}
+
+public class Admin extends Person {
+  public boolean blockUser(Customer customer);
+  public boolean unblockUser(Customer customer);
+}

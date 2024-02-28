@@ -1,0 +1,24 @@
+public class Profile {
+  private String summary;
+  private List<Experience> experiences;
+  private List<Education> educations;
+  private List<Skill> skills;
+  private List<Accomplishment> accomplishments;
+  private List<Recommendation> recommendations;
+  private List<Stat> stats;
+
+  public boolean addExperience(Experience experience);
+  public boolean addEducation(Education education);
+  public boolean addSkill(Skill skill);
+  public boolean addAccomplishment(Accomplishment accomplishment);
+  public boolean addRecommendation(Recommendation recommendation);
+}
+
+public class Experience {
+  private String title;
+  private String company;
+  private String location;
+  private Date from;
+  private Date to;
+  private String description;
+}

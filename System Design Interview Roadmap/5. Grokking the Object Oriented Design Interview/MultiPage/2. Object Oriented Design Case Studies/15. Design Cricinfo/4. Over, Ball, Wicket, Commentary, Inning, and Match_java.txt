@@ -1,0 +1,64 @@
+public class Over {
+  private int number;
+  private List<Ball> balls;
+
+  public boolean addBall(Ball ball);
+}
+
+public class Ball {
+  private Player balledBy;
+  private Player playedBy;
+  private BallType type;
+
+  private Wicket wicket;
+  private List<Run> runs;
+  private Commentary commentary;
+
+}
+
+public class Wicket {
+  private WicketType wicketType;
+  private Player playerOut;
+  private Player caughtBy;
+  private Player runoutBy;
+  private Player stumpedBy;
+}
+
+public class Commentary {
+  private String text;
+  private Date createdAt;
+  private Commentator createdBy;
+}
+
+public class Inning {
+  private int number;
+  private Date startTime;
+  private List<Over> overs;
+
+  public boolean addOver(Over over);
+}
+
+public abstract class Match {
+  private int number;
+  private Date startTime;
+  private MatchResult result;
+
+  private Playing11[] teams;
+  private List<Inning> innings;
+  private List<Umpire> umpires;
+  private Referee referee;
+  private List<Commentator> commentators;
+  private List<MatchStat> matchStats;
+
+  public boolean assignStadium(Stadium stadium);
+
+  public boolean assignReferee(Referee referee);
+}
+
+public class ODI extends Match {
+  //...
+}
+
+public class Test extends Match {
+  //...
+}

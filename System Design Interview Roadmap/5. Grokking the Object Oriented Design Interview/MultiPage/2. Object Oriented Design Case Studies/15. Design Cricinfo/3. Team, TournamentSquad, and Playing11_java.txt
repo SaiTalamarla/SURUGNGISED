@@ -1,0 +1,24 @@
+public class Team {
+  private String name;
+  private List<Player> players;
+  private List<News> news;
+  private Coach coach;
+
+  public boolean addTournamentSquad(TournamentSquad tournamentSquad);
+  public boolean addPlayer(Player player);
+  public boolean addNews(News news);
+}
+
+public class TournamentSquad {
+  private List<Player> players;
+  private List<TournamentStat> tournamentStats;
+
+  public boolean addPlayer(Player player);
+}
+
+public class Playing11 {
+  private List<Player> players;
+  private Player twelfthMan;
+
+  public boolean addPlayer(Player player);
+}

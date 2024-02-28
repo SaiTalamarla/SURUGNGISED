@@ -1,0 +1,68 @@
+public abstract class Vehicle {
+    private String licenseNumber;
+    private String stockNumber;
+    private int passengerCapacity;
+    private String barcode;
+    private boolean hasSunroof;
+    private VehicleStatus status;
+    private String model;
+    private String make;
+    private int manufacturingYear;
+    private int mileage;
+
+    private List<VehicleLog> log;
+
+    public boolean reserveVehicle();
+
+    public boolean returnVehicle();
+  }
+
+  public class Car extends Vehicle {
+    private CarType type;
+  }
+
+  public class Van extends Vehicle {
+    private VanType type;
+  }
+
+  public class Truck extends Vehicle {
+    private String type;
+  }
+
+  // We can have similar definition for other vehicle types
+
+  //...
+
+  public class VehicleLog {
+    private String id;
+    private VehicleLogType type;
+    private String description;
+    private Date creationDate;
+
+    public bool update();
+
+    public List<VehicleLogType> searchByLogType(VehicleLogType type);
+  }
+
+  public class VehicleReservation {
+    private String reservationNumber;
+    private Date creationDate;
+    private ReservationStatus status;
+    private Date dueDate;
+    private Date returnDate;
+    private String pickupLocationName;
+    private String returnLocationName;
+
+    private int customerID;
+    private Vehicle vehicle;
+    private Bill bill;
+    private List<AdditionalDriver> additionalDrivers;
+    private List<Notification> notifications;
+    private List<RentalInsurance> insurances;
+    private List<Equipment> equipments;
+    private List<Service> services;
+
+    public static VehicleReservation fetchReservationDetails(String reservationNumber);
+
+    public List<Passenger> getAdditionalDrivers();
+  }

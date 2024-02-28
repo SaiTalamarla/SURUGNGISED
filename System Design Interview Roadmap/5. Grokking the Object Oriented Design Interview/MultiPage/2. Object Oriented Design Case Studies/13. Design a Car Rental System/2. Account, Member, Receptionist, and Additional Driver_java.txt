@@ -1,0 +1,29 @@
+// For simplicity, we are not defining getter and setter functions. The reader can
+// assume that all class attributes are private and accessed through their respective
+// public getter method and modified only through their public setter method.
+
+    public abstract class Account {
+      private String id;
+      private String password;
+      private AccountStatus status;
+      private Person person;
+
+      public boolean resetPassword();
+    }
+
+    public class Member extends Account {
+      private int totalVehiclesReserved;
+
+      public List<VehicleReservation> getReservations();
+    }
+
+    public class Receptionist extends Account {
+      private Date dateJoined;
+
+      public List<Member> searchMember(String name);
+    }
+
+    public class AdditionalDriver {
+      private String driverID;
+      private Person person;
+    }
