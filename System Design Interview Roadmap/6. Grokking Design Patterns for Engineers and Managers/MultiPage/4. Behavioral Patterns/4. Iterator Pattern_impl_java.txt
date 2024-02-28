@@ -1,0 +1,66 @@
+import java.util.ArrayList;
+import java.util.List;
+
+class Book {
+    String title;
+
+    Book(String title) {
+        this.title = title;
+    }
+}
+
+interface Iterator {
+    boolean hasNext();
+    Book next();
+}
+
+class BookCollection {
+    private List<Book> books = new ArrayList<>();
+
+    void addBook(Book book) {
+        books.add(book);
+    }
+
+    Iterator createIterator() {
+        return new BookIterator(this);
+    }
+
+    Book get(int index) {
+        return books.get(index);
+    }
+
+    int size() {
+        return books.size();
+    }
+
+    private class BookIterator implements Iterator {
+        private BookCollection collection;
+        private int currentIndex = 0;
+
+        BookIterator(BookCollection collection) {
+            this.collection = collection;
+        }
+
+        public boolean hasNext() {
+            return currentIndex < collection.size();
+        }
+
+        public Book next() {
+            return hasNext() ? collection.get(currentIndex++) : null;
+        }
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        BookCollection collection = new BookCollection();
+        collection.addBook(new Book("Book 1"));
+        collection.addBook(new Book("Book 2"));
+
+        Iterator iterator = collection.createIterator();
+        while (iterator.hasNext()) {
+            Book book = iterator.next();
+            System.out.println(book.title);
+        }
+    }
+}

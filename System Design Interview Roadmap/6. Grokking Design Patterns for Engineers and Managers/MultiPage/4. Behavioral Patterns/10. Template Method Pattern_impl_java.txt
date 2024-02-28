@@ -1,0 +1,40 @@
+public abstract class ReportGenerator {
+    protected abstract String collectData();
+    protected abstract String processData(String data);
+    protected abstract String formatReport(String processedData);
+
+    private void printReport(String report) {
+        System.out.println(report);
+    }
+
+    public void generateReport() {
+        String data = collectData();
+        String processedData = processData(data);
+        String report = formatReport(processedData);
+        printReport(report);
+    }
+}
+
+class CSVReportGenerator extends ReportGenerator {
+    protected String collectData() {
+        return "CSV Data";
+    }
+
+    protected String processData(String data) {
+        return "Processed " + data;
+    }
+
+    protected String formatReport(String processedData) {
+        return "CSV Report: " + processedData;
+    }
+}
+
+// Similar classes for HTMLReportGenerator and PDFReportGenerator
+
+public class Solution {
+    public static void main(String[] args) {
+        ReportGenerator csvReport = new CSVReportGenerator();
+        csvReport.generateReport();
+        // Similarly for other report types
+    }
+}

@@ -1,0 +1,59 @@
+// Implementor
+interface Transmission {
+    void applyGear();
+}
+
+// ConcreteImplementors
+class ManualTransmission implements Transmission {
+    public void applyGear() {
+        System.out.println("Manual transmission applied.");
+    }
+}
+
+class AutomaticTransmission implements Transmission {
+    public void applyGear() {
+        System.out.println("Automatic transmission applied.");
+    }
+}
+
+// Abstraction
+abstract class Vehicle {
+    protected Transmission transmission;
+
+    public Vehicle(Transmission transmission) {
+        this.transmission = transmission;
+    }
+
+    abstract void applyTransmission();
+}
+
+// RefinedAbstraction
+class Car extends Vehicle {
+    public Car(Transmission transmission) {
+        super(transmission);
+    }
+
+    void applyTransmission() {
+        transmission.applyGear();
+    }
+}
+
+class Truck extends Vehicle {
+    public Truck(Transmission transmission) {
+        super(transmission);
+    }
+
+    void applyTransmission() {
+        transmission.applyGear();
+    }
+}
+
+// Client code
+public class Solution {
+    public static void main(String[] args) {
+        Transmission manual = new ManualTransmission();
+        Vehicle car = new Car(manual);
+        car.applyTransmission();
+    }
+}
+

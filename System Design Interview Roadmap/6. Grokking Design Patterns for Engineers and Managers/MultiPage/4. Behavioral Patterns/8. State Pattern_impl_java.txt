@@ -1,0 +1,65 @@
+interface State {
+    void publish(Document doc);
+    void approve(Document doc);
+}
+
+class Document {
+    private State state;
+
+    public Document() {
+        this.state = new Draft();
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public void publish() {
+        state.publish(this);
+    }
+
+    public void approve() {
+        state.approve(this);
+    }
+}
+
+class Draft implements State {
+    public void publish(Document doc) {
+        System.out.println("Publishing draft, moving to moderation.");
+        doc.setState(new Moderation());
+    }
+
+    public void approve(Document doc) {
+        System.out.println("Draft cannot be approved directly.");
+    }
+}
+
+class Moderation implements State {
+    public void publish(Document doc) {
+        System.out.println("Cannot publish from Moderation without approval.");
+    }
+
+    public void approve(Document doc) {
+        System.out.println("Approving moderation, moving to published.");
+        doc.setState(new Published());
+    }
+}
+
+class Published implements State {
+    public void publish(Document doc) {
+        System.out.println("Already published.");
+    }
+
+    public void approve(Document doc) {
+        System.out.println("Already approved.");
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Document doc = new Document();
+        doc.publish();
+        doc.approve();
+    }
+}
+

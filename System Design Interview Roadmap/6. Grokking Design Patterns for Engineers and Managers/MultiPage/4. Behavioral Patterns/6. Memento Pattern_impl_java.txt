@@ -1,0 +1,60 @@
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Stack;
+
+// Memento class
+class GameSave {
+    private final int level;
+    private final int score;
+    private final List<String> inventory;
+
+    public GameSave(int level, int score, List<String> inventory) {
+        this.level = level;
+        this.score = score;
+        this.inventory = new ArrayList<>(inventory);
+    }
+
+    public int getLevel() { return level; }
+    public int getScore() { return score; }
+    public List<String> getInventory() { return inventory; }
+}
+
+// Originator class
+class Game {
+    private int level = 0;
+    private int score = 0;
+    private List<String> inventory = new ArrayList<>();
+    private Stack<GameSave> saves = new Stack<>();
+
+    public void play(int levelIncrement, int scoreIncrement, List<String> newItems) {
+        level += levelIncrement;
+        score += scoreIncrement;
+        inventory.addAll(newItems);
+        saves.push(new GameSave(level, score, inventory));
+    }
+
+    public void undoLastPlay() {
+        if (!saves.isEmpty()) {
+            GameSave save = saves.pop();
+            level = save.getLevel();
+            score = save.getScore();
+            inventory = save.getInventory();
+        }
+    }
+
+    public void printStatus() {
+        System.out.println("Level: " + level + ", Score: " + score + ", Inventory: " + inventory);
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Game game = new Game();
+        game.play(1, 100, List.of("Sword", "Shield"));
+        game.printStatus();
+        game.play(2, 200, List.of("Bow", "Arrow"));
+        game.printStatus();
+        game.undoLastPlay();
+        game.printStatus();
+    }
+}

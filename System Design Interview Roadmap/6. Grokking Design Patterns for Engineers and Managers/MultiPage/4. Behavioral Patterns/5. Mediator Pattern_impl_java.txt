@@ -1,0 +1,80 @@
+interface Mediator {
+    void sendMessage(String message, Department department);
+}
+
+interface Department {
+    void setMediator(Mediator mediator);
+    void sendMessage(String message);
+    void receiveMessage(String message);
+}
+
+class HRDepartment implements Department {
+    private Mediator mediator;
+
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
+    }
+
+    public void sendMessage(String message) {
+        mediator.sendMessage(message, this);
+    }
+
+    public void receiveMessage(String message) {
+        System.out.println("HR Department received: " + message);
+    }
+}
+class FinanceDepartment implements Department {
+    private Mediator mediator;
+
+    public void setMediator(Mediator mediator) {
+        this.mediator = mediator;
+    }
+
+    public void sendMessage(String message) {
+        mediator.sendMessage(message, this);
+    }
+
+    public void receiveMessage(String message) {
+        System.out.println("Finance Department received: " + message);
+    }
+}
+
+// Similar class for FinanceDepartment
+
+class OfficeMediator implements Mediator {
+    private HRDepartment hr;
+    private FinanceDepartment finance;
+
+    public void setHRDepartment(HRDepartment hr) {
+        this.hr = hr;
+    }
+
+    public void setFinanceDepartment(FinanceDepartment finance) {
+        this.finance = finance;
+    }
+
+    public void sendMessage(String message, Department department) {
+        if (department.equals(hr) && finance != null) {
+            finance.receiveMessage(message);
+        } else if (department.equals(finance) && hr != null) {
+            hr.receiveMessage(message);
+        }
+    }
+}
+
+
+public class Solution {
+    public static void main(String[] args) {
+        OfficeMediator mediator = new OfficeMediator();
+        HRDepartment hr = new HRDepartment();
+        FinanceDepartment finance = new FinanceDepartment();
+
+        mediator.setHRDepartment(hr);
+        mediator.setFinanceDepartment(finance);
+
+        hr.setMediator(mediator);
+        finance.setMediator(mediator);
+
+        hr.sendMessage("HR update for all departments");
+    }
+}

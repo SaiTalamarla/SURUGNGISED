@@ -1,0 +1,66 @@
+interface DiscountVisitor {
+    void visitFood(Food food);
+    void visitClothing(Clothing clothing);
+    void visitElectronics(Electronics electronics);
+}
+
+interface Product {
+    void accept(DiscountVisitor visitor);
+}
+
+class Food implements Product {
+    public void accept(DiscountVisitor visitor) {
+        visitor.visitFood(this);
+    }
+}
+
+class Clothing implements Product {
+    public void accept(DiscountVisitor visitor) {
+        visitor.visitClothing(this);
+    }
+}
+
+class Electronics implements Product {
+    public void accept(DiscountVisitor visitor) {
+        visitor.visitElectronics(this);
+    }
+}
+
+class HolidayDiscountVisitor implements DiscountVisitor {
+    public void visitFood(Food food) {
+        System.out.println("Applying holiday discount to food.");
+    }
+    public void visitClothing(Clothing clothing) {
+        System.out.println("Applying holiday discount to clothing.");
+    }
+    public void visitElectronics(Electronics electronics) {
+        System.out.println("Applying holiday discount to electronics.");
+    }
+}
+
+class ClearanceDiscountVisitor implements DiscountVisitor {
+    public void visitFood(Food food) {
+        System.out.println("Applying clearance discount to food.");
+    }
+    public void visitClothing(Clothing clothing) {
+        System.out.println("Applying clearance discount to clothing.");
+    }
+    public void visitElectronics(Electronics electronics) {
+        System.out.println("Applying clearance discount to electronics.");
+    }
+}
+
+public class Solution {
+    public static void main(String[] args) {
+        Product food = new Food();
+        Product clothing = new Clothing();
+        Product electronics = new Electronics();
+
+        DiscountVisitor holidayVisitor = new HolidayDiscountVisitor();
+        DiscountVisitor clearanceVisitor = new ClearanceDiscountVisitor();
+
+        food.accept(holidayVisitor);
+        clothing.accept(clearanceVisitor);
+        electronics.accept(holidayVisitor);
+    }
+}
